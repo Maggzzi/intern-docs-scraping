@@ -15,5 +15,5 @@ export interface Platform {
     limit: number
   ): Promise<string[]>;
 
-  scrapeItemPage(page: Page): Promise<Listing>;
+  scrapeItemPage(page: Page): Promise<Listing | null>;
 }
