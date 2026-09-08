@@ -59,7 +59,7 @@ async function main() {
   //pakt meer urls dan limit zodat er backups zijn voor geskippte lists
   const backupLimit = limit * 3;
 
-  //get urls 
+  //get urls (use method scrapeSearchPage)
   const urls = await platformInstance.scrapeSearchPage(searchPage, searchTerm, backupLimit);
   console.log(`Found ${urls.length} to check `)
   await searchPage.close();
@@ -76,6 +76,7 @@ async function main() {
     const listingPage = await browser.newPage();
     try {
       await listingPage.goto(url, { waitUntil: "networkidle2"});
+      //scrape items (use method scrapeItemPage)
       const listing = await platformInstance.scrapeItemPage(listingPage);
       
       //if listing is not null, push it to array validListing
