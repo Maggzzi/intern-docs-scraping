@@ -57,7 +57,9 @@ async function main() {
   const searchPage = await browser.newPage()
 
   //pakt meer urls dan limit zodat er backups zijn voor geskippte lists
-  const backupLimit = limit * 3;
+  //const backupLimit = limit * 3;
+  const backupLimit = platformInstance.name === "marktplaats" ? limit * 3 : limit
+  console.log(`Setting boundary for extracting urls to ${backupLimit}`)
 
   //get urls (use method scrapeSearchPage)
   const urls = await platformInstance.scrapeSearchPage(searchPage, searchTerm, backupLimit);
