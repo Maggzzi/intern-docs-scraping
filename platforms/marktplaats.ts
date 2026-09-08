@@ -42,9 +42,20 @@ export class Marktplaats implements Platform {
 
         //if each url is unique AND there are less quantity urls than limit, push to allUrls list.
         for (const url of cleaned_urls) {
-          if (!allUrls.includes(url) && allUrls.length < targetUrlCount) {
-            allUrls.push(url);
+
+          //remove tracking token to avoid duplicate urls 
+          const clean_url = url.split('?')[0];
+
+          if (allUrls.includes(clean_url)) {
+            continue;
           }
+
+          if (allUrls.length < targetUrlCount) {
+            allUrls.push(clean_url)
+          } else {
+            break;
+          }
+
         }
 
         console.log(`Collected ${allUrls.length} total urls so far.`);
