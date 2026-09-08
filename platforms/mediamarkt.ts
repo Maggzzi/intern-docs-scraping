@@ -123,7 +123,7 @@ export class Mediamarkt implements Platform {
 
     //autoScroll function for everything to get loaded (mediamarkt uses lazyloading, so need to scroll )
     // Helper utility attached to the class layout natively
-    private async autoScroll(page: any) {
+    private async autoScroll(page: Page) {
         await page.evaluate( async() => {
             await new Promise<void>((resolve) => {
                 let totalHeight = 0;

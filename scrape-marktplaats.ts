@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import { Page } from "puppeteer";
 
 async function main() {
   const browser = await puppeteer.launch({
@@ -68,7 +69,7 @@ async function main() {
         const price = await listingPage.$eval('span[data-test="branded-price-whole-value"]', (e) => e.textContent)
         const url = listingPage.url();
 
-        //console.log({title, price, url});
+        console.log({title, price, url});
         await listingPage.close();
         allScrapedUrls.add(urlOfListing)
 
@@ -100,7 +101,7 @@ async function main() {
 
 
 //autoScroll function for everything to get loaded (mediamarkt uses lazyloading, so need to scroll )
-async function autoScroll(page: any) {
+async function autoScroll(page: Page) {
   await page.evaluate( async() => {
     await new Promise<void>((resolve) => {
       let totalHeight = 0;
